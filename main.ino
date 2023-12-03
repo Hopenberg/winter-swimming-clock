@@ -1,13 +1,3 @@
-/**
-   Simon Game for ESP32-C3 with Score display
-
-   Copyright (C) 2023, Uri Shaked
-
-   Released under the MIT License.
-*/
-
-#include "pitches.h"
-
 /* Define pin numbers for LEDs, buttons and speaker: */
 const uint8_t buttonPins[] = {0, 1, 2, 3};
 
@@ -134,8 +124,11 @@ void startCountdownDown() {
 
 void startCountdownUp() {
   int countHelper = 0;
+  
   while (countHelper++ < counterTime) {
     displayScore(countHelper);
     delay(1000);
   }
+
+  counterTime = 0;
 }
