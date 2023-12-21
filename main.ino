@@ -1,6 +1,8 @@
 /* Define pin numbers for LEDs, buttons and speaker: */
 const uint8_t buttonPins[] = {0, 1, 2, 3};
 
+// https://wokwi.com/projects/383196578309148673
+
 // These are connected to 74HC595 shift register (used to show game score):
 const int LATCH_PIN = 18;  // 74HC595 pin 12
 const int DATA_PIN = 19;   // 74HC595 pin 14
@@ -9,7 +11,7 @@ const int CLOCK_PIN = 9;  // 74HC595 pin 11
 byte indexButtonStartDown = 0;
 byte indexButtonStartUp = 1;
 byte indexButtonAddTime = 2;
-byte indexButtonReduceTime = 3;
+byte indexButtonReduceTime = 5;
 
 int counterTime = 0;
 
