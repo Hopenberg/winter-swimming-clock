@@ -1,9 +1,6 @@
 import time
 from guizero import App, Text, TextBox, PushButton, Slider, Picture
 
-def empty():
-    return 0
-
 def secondsToText(seconds):
     minutes = str(int(seconds / 60))
     secondsPart = str(seconds % 60)
