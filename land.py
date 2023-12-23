@@ -63,7 +63,7 @@ app = App(title="Winter swimming clock", width=1000, height=600)
 displayClock = "00:00"
 timer = 0
 
-timer = Text(app, text=displayClock, size=250, font="Courier New")
+timer = Text(app, text=displayClock, size=250, font="Courier New", color="#c3b091")
 add_time = PushButton(app, text="Dodaj", command=incrementTime, args=[15, 600], width=45, image="icon_plus.png")
 remove_time = PushButton(app, text="Odejmij", command=decrementTime, args=[15, 0], width=45, image="icon_minus.png")
 button_start_down = PushButton(app, text="Liczenie w dół", command=beginCountdown, width=45, image="icon_down.png")
