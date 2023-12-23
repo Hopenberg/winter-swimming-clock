@@ -11,7 +11,7 @@
 DHT dht(DHT_PIN, DHT_TYPE);
 
 int heartrate;
-int data[2];
+int data[2] = {-1, -1};
 
 void setup() {
   Serial.begin(115200);
@@ -21,18 +21,19 @@ void setup() {
 void loop() {
   delay(2000);  // Wait for 2 seconds between measurements
 
-  float humidity = dht.readHumidity();
-  float temperature = dht.readTemperature();
+  data[0] = readHeartrate();
 
-  if (isnan(humidity) || isnan(temperature)) {
+  if (isnan(data[0]) || isnan(data[1])) {
     Serial.println("Failed to read from DHT sensor!");
     return;
   }
 
-  Serial.print("Humidity: ");
-  Serial.print(humidity);
-  Serial.print("%  Temperature: ");
-  Serial.print(temperature);
+  sendData(data);
+
+  Serial.print("Heartrate: ");
+  Serial.print(data[0]);
+  Serial.print("Temperature: ");
+  Serial.print(data[1]);
   Serial.println("°C");
 }
 
