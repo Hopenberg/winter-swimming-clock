@@ -53,10 +53,9 @@ def beginCountup():
     timer.value = secondsToText(0)
     timer.repeat(5, incrementTime, args=[1, stopAt])
 
-
-
-
-
+def readData():
+    # code for reading the data from water
+    return
 
 
 app = App(title="Winter swimming clock", width=1000, height=600)
@@ -65,10 +64,10 @@ displayClock = "00:00"
 timer = 0
 
 timer = Text(app, text=displayClock, size=250, font="Courier New")
-add_time = PushButton(app, text="Dodaj", command=incrementTime, args=[15, 600], width=30, image="icon_plus.png")
-remove_time = PushButton(app, text="Odejmij", command=decrementTime, args=[15, 0], width=30, image="icon_minus.png")
-button_start_down = PushButton(app, text="Liczenie w dół", command=beginCountdown, width=30, image="icon_down.png")
-button_start_up = PushButton(app, text="Liczenie w górę", command=beginCountup, width=30, image="icon_up.png")
+add_time = PushButton(app, text="Dodaj", command=incrementTime, args=[15, 600], width=45, image="icon_plus.png")
+remove_time = PushButton(app, text="Odejmij", command=decrementTime, args=[15, 0], width=45, image="icon_minus.png")
+button_start_down = PushButton(app, text="Liczenie w dół", command=beginCountdown, width=45, image="icon_down.png")
+button_start_up = PushButton(app, text="Liczenie w górę", command=beginCountup, width=45, image="icon_up.png")
 
 app.display()
 
