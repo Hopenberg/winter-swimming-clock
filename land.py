@@ -1,5 +1,9 @@
+from random import randint
 import time
 from guizero import App, Text, TextBox, PushButton, Slider, Picture, Box
+import bluetooth
+
+TIME_UNIT = 1000
 
 def secondsToText(seconds):
     minutes = str(int(seconds / 60))
@@ -50,16 +54,39 @@ def beginCountup():
     timer.value = secondsToText(0)
     timer.repeat(5, incrementTime, args=[1, stopAt])
 
-def readData():
-    # code for reading the data from water
-    return
+def readHeartrate():
+    target_device_address = "00:11:22:33:44:55" 
+    port = 1 
+
+    sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+    sock.connect((target_device_address, port))
+
+    data = sock.recv(1024)
+
+    heartrateFromWater = data.split("#--#")[0]
+
+    heartrate.value = randint(80,140)
+
+def readTemperature():
+    target_device_address = "00:11:22:33:44:55"  
+    port = 1  
+
+    sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+    sock.connect((target_device_address, port))
+
+    data = sock.recv(1024)
+
+    tempreatureFromWater = data.split("#--#")[1]
+
+    temperature.value = randint(10,30)
+
 
 
 app = App(title="Winter swimming clock", width=1024, height=600)
 
 displayClock = "00:00"
-displayHeartrate = "123 <3"
-displayTemperature = "23 C"
+displayHeartrateValue = "123 <3"
+displayTemperatureValue = "23 C"
 timer = 0
 padding = 10
 
@@ -72,7 +99,7 @@ buttons_box_top = Box(buttons_box, align="top")
 buttons_box_bottom = Box(buttons_box, align="bottom")
 
 left_pad = Box(buttons_box_top, align="left", height="fill", width=padding)
-add_time = PushButton(buttons_box_top, 
+add_time = PushButton(buttons_box_top,
                       text="Dodaj", 
                       command=incrementTime, 
                       args=[15, 600], 
@@ -110,8 +137,12 @@ button_start_down = PushButton(buttons_box_bottom,
 
 data_box = Box(app, align="left", width="fill")
 
-heartrate = Text(data_box, text=displayHeartrate, size=50, font="Lato", color="red", align="top")
-temperature = Text(data_box, text=displayTemperature, size=50, font="Lato", color="blue", align="bottom")
+heartrate = Text(data_box, text=displayHeartrateValue, size=50, font="Lato", color="red", align="top")
+temperature = Text(data_box, text=displayTemperatureValue, size=50, font="Lato", color="blue", align="bottom")
+
+temperature.repeat(TIME_UNIT, readTemperature)
+heartrate.repeat(TIME_UNIT, readHeartrate)
+
 
 app.display()
 
